@@ -1,0 +1,93 @@
+@font-face{
+    font-family: 'Sui Generis';
+    src: url('Assets/generis.ttf');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+    overflow: hidden;
+    color: white;
+    font-family: 'Sui Generis';
+}
+.container{
+    height: 100vh;
+    width: 100vw;
+    perspective: 200px;
+    position: relative;
+}
+.hex{
+    position: absolute;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dept{
+    position: absolute;
+    top: 6vw;
+    left: 10vw;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    max-width: 80vw;
+    transition: opacity 0.8s ease-in-out;
+}
+.dept h1{
+    font-size: 3.5vw;
+}
+.photo{
+    position: absolute; 
+    top: 16vw;
+    left: 21vw;
+    height: 33vw;
+    width: 26vw;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 5;
+}
+.image{
+    position: absolute;
+    bottom: 0vw;
+    left: 0.5vw;
+    height: 32vw;
+    width: 30vw;
+    border-radius: 1rem;
+    /* background: linear-gradient(180deg, #1C1C1C 0%, #000000 100%); */
+    transform: translateY(-20px) translateX(20px);
+    transition: opacity 0.8s ease-in-out;
+}
+.photo img{
+    
+    height: 25vw;
+    width: 27vw;
+}
+.name{
+    position: absolute;
+    display: flex;
+    top: 20vw;
+    left: 55vw;
+    border-radius: 10px;
+    height: 18vw;
+    width: 25vw;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.46);
+    transition: opacity 0.8s ease-in-out;
+    z-index: 5;
+}
+.name h2{
+    text-align: center;
+    font-size: 4.5vw;
+}
+
+.hex #0-0{
+    opacity: 1;
+}
