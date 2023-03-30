@@ -35,7 +35,7 @@ function createHex(){
             hexagon.style.width = hexWidth + 'px';
             hexagon.style.opacity = 0;
             addHex(hexagon);
-            // fillHex(hexagon);
+            fillHex(hexagon);
             bg.appendChild(hexagon, hexHeight, hexWidth);
             
             if (r % 2 == 0) {
@@ -47,40 +47,23 @@ function createHex(){
 }
 
 function fillHex(hex) {
-    const hexSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    const hexPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    const hexDefs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    const hexLG = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
-    const hexStop = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    hex.innerHTML = `<svg width="140" height="140" viewBox="0 0 140 140" fill="black" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.49733 110.64V30.2381L69.0719 1.62278L138.503 30.2484V110.63L69.0717 138.384L1.49733 110.64Z" stroke="#F3A712" stroke-width="2.99465"/>
+    <path d="M125 37.9791L70.7353 15L15 37.9791V102.72L70.7353 125L125 102.72V37.9791Z" fill="url(#paint0_linear_1775_4384)"/>
+    <defs>
+    <linearGradient id="paint0_linear_1775_4384" x1="70" y1="20.1071" x2="70" y2="125" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#F3A712"/>
+    <stop offset="0.9999" stop-color="#F3A712" stop-opacity="1"/>
+    <stop offset="1"/>
+    </linearGradient>
+    </defs>
+    </svg>
+    
+            `;
 
-        hexSvg.setAttribute('fill', '#F3A712');
-        hexSvg.setAttribute('viewBox', '0 0 92 92');
-        hexSvg.setAttribute('width', '92');
-        hexSvg.setAttribute('height', '92');
-
-        hexSvg.setAttribute('stroke', hexColor); 
-
-        hexPath.setAttribute('d', 'M0 19.1019L45.1087 0L91.4398 19.1019V72.9193L45.1087 91.4398L0 72.9193V19.1019Z');
-        hexPath.setAttribute('fill','fill="url(#paint0_linear_1691_5891)');
-        
-        hexLG.setAttribute('id','paint0_linear_1691_5891');
-        hexLG.setAttribute('x1','45.7199');
-        hexLG.setAttribute('y1','4.24542');
-        hexLG.setAttribute('x2','45.7199');
-        hexLG.setAttribute('y2','91.4398');
-        hexLG.setAttribute('gradientUnits','userSpaceOnUse');
-
-        hexStop.setAttribute('stop-color','#F3A712');
-        hexStop.setAttribute('offset','0.9999');
-        hexStop.setAttribute('stop-opacity', '0.536458');
-
-        hexDefs.appendChild(hexLG);
-        hexDefs.appendChild(hexStop);
-
-        hexSvg.appendChild(hexDefs);
-        hexSvg.appendChild(hexPath);
-        return hex.appendChild(hexSvg);
 }
+
+
 
 function addHex(hex, hexHeight, hexWidth) {
     const hexSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -194,6 +177,7 @@ function stayLit() {
     document.getElementById('0-0').style.opacity = 1;
     document.getElementById('0-1').style.opacity = 1;
     document.getElementById('1-0').style.opacity = 1;
+    fillHex(document.getElementById('1-0'));
 
     document.getElementById('0-13').style.opacity = 1;
     document.getElementById('1-13').style.opacity = 1;
@@ -218,10 +202,13 @@ function stayLit() {
     document.getElementById('9-12').style.opacity = 1;
     document.getElementById('9-13').style.opacity = 1;
 }
+var glowTimeout = [];
+var hideTimeout = [];
+var timeoutValue = 0;
 
 function lightUp(){
     for (let k = 0; k < rows * columns * 5 ; k++) {
-        setTimeout(() => {
+        glowTimeout[k] =  setTimeout(() => {
             var r = Math.floor(Math.random() * rows);
             var c = Math.floor(Math.random() * columns);
             var selectedHex = document.getElementById(r + "-" + c);
@@ -229,9 +216,9 @@ function lightUp(){
         }, k * showSpeed);
     }
         
-    var timeValue = setTimeout(() => {
+    var timeoutValue = setTimeout(() => {
         for (let k = 0; k < rows * columns * 6; k++) {
-            setTimeout(() => {
+            hideTimeout[k] = setTimeout(() => {
                 var r = Math.floor(Math.random() * rows);
                 var c = Math.floor(Math.random() * columns);
                 var selectedHex = document.getElementById(r + "-" + c);
@@ -242,69 +229,6 @@ function lightUp(){
         }
     }, 4000);
     
-    // 
-        
-        console.log(rows*columns);
-
-        // while (numberVisible() != (rows * columns)) {
-        //     setTimeout(() => {
-        //         var r = Math.floor(Math.random() * rows);
-        //         var c = Math.floor(Math.random() * columns);
-        //         var selectedHex = document.getElementById(r + "-" + c);
-        //         selectedHex.style.opacity = 1;
-        //     }, 200);
-        // }
-
-
-        // for (let u = rows ; u > rows - 2; u--) {
-        //     for (let v = 0; v < columns + 1; v++) {
-        //         setTimeout(() => {
-        //             var hex = document.getElementById(u + "-" + v);
-        //             hex.style.opacity = 1;
-        //         },  1000);
-        //     }
-        // }
-        // for (let u = rows - 2; u > rows - 5; u--) {
-        //     for (let v = 0; v < columns + 1; v++) {
-        //         setTimeout(() => {
-        //             var hex = document.getElementById(u + "-" + v);
-        //             hex.style.opacity = 1;
-        //         },  2000);
-        //     }
-        // }
-        // for (let u = rows - 5; u > rows - 8; u--) {
-        //     for (let v = 0; v < columns + 1; v++) {
-        //         setTimeout(() => {
-        //             var hex = document.getElementById(u + "-" + v);
-        //             hex.style.opacity = 1;
-        //         },  3000);
-        //     }
-        // }
-        // for (let u = rows - 8; u > rows - 11; u--) {
-        //     for (let v = 0; v < columns + 1; v++) {
-        //         setTimeout(() => {
-        //             var hex = document.getElementById(u + "-" + v);
-        //             hex.style.opacity = 1;
-        //         },  4000);
-        //     }
-        // }
-        // for (let u = rows - 9; u > rows - 10; u--) {
-        //     for (let v = 0; v < columns + 1; v++) {
-        //         setTimeout(() => {
-        //             var hex = document.getElementById(u + "-" + v);
-        //             hex.style.opacity = 1;
-        //         },  5000);
-        //     }
-        // }
-        // for (let u = rows - 12; u > rows - 15; u--) {
-        //     for (let v = 0; v < columns + 1; v++) {
-        //         setTimeout(() => {
-        //             var hex = document.getElementById(u + "-" + v);
-        //             hex.style.opacity = 1;
-        //         },  6000);
-        //     }
-        // }
-
 
     
 }
@@ -369,8 +293,48 @@ data = [
     },
 ]
 
+var timeout1 = 0;
+var timeout2 = 0;
+var timeout3 = 0;
+
+
+function changeData() {
+    timeout1 = setTimeout(() => {
+        photo.style.opacity = 0;
+        nameContainer.style.opacity = 0;
+        dept.style.opacity = 0;
+    }, 400);
+    timeout2 = setTimeout(() => {
+        updateValue();
+    }, 1000);
+    timeout3 = setTimeout(() => {
+        photo.style.opacity = 1;
+        nameContainer.style.opacity = 1;
+        dept.style.opacity = 1;
+    }, 1200);
+}
+function updateValue() {
+let d = data[currentData];
+nameCostaa.innerHTML = d.name;
+deptName.innerHTML = d.dept;
+image.src = d.photo;
+}
+
+
 window.addEventListener('keydown', e => {
     keyPressed = parseInt(e.key);
+    clearTimeout(timeout1);
+        clearTimeout(timeout2);
+        clearTimeout(timeout3);
+        for (let k = 0; k < rows * columns * 5; k++) {
+            clearTimeout(glowTimeout[k]);
+        }
+        for (let k = 0; k < rows * columns * 6; k++) {
+            clearTimeout(hideTimeout[k]);
+        }
+        clearTimeout(timeoutValue);
+
+
     if (keyPressed >= 1 && keyPressed <=9   ) {
         currentData = keyPressed - 1;
         console.log(currentData);
@@ -378,54 +342,9 @@ window.addEventListener('keydown', e => {
         setTimeout(() => {
             changeData();
         }, 2000);
-        // setTimeout(() => {
-        //     stayLit();
-        // }, 2500);
-    }
-})
- function changeData() {
-//     imageContainer.style.transform = "translateY(0px) translateX(0px)";
-//     setTimeout(() => {
-//         photo.style.transform = "translateY(1000px)";
-//     }, 200);
-//     setTimeout(() => {
-//         nameContainer.style.transform = "translateY(1000px)";
-//         dept.style.transform = "translateY(-200px)";
-//     }, 400);
-//     setTimeout(() => {
-//         updateValue();
-//     }, 800);
-//     setTimeout(() => {
-//         photo.style.transform = "translateY(0px)";
-//     }, 1000);
-//     setTimeout(() => {
-//         nameContainer.style.transform = "translateY(0px)";
-//         dept.style.transform = "translate(0px)";
-//     }, 1200);
-//     setTimeout(() => {
-//         imageContainer.style.transform = "translateY(-20px) translateX(20px)";
-//     }, 1700);
-//     setTimeout(() => {
-//         imageContainer.style.transform = "translateY(0px) translateX(0px)";
-//     }, 1400);
 
-        setTimeout(() => {
-            photo.style.opacity = 0;
-            nameContainer.style.opacity = 0;
-            dept.style.opacity = 0;
-        }, 400);
-        setTimeout(() => {
-            updateValue();
-        }, 1000);
-        setTimeout(() => {
-            photo.style.opacity = 1;
-            nameContainer.style.opacity = 1;
-            dept.style.opacity = 1;
-        }, 1200);
- }
- function updateValue() {
-    let d = data[currentData];
-    nameCostaa.innerHTML = d.name;
-    deptName.innerHTML = d.dept;
-    image.src = d.photo;
- }
+
+        
+    }
+
+})

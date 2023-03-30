@@ -65,7 +65,7 @@ body{
     transition: opacity 0.8s ease-in-out;
 }
 .photo img{
-    
+    object-fit: cover;
     height: 25vw;
     width: 27vw;
 }
@@ -79,7 +79,7 @@ body{
     width: 25vw;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.46);
+    background: rgba(0, 0, 0, 0);
     transition: opacity 0.8s ease-in-out;
     z-index: 5;
 }
