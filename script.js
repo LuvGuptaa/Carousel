@@ -11,7 +11,7 @@ const marginLeft = 20;
 const hexColor = '#F3A712';
 const changeHex = 100;
 const rowGap = 2;
-const showSpeed = 6;  //Lower == more speed
+const showSpeed = 3;  //Lower == more speed
 const hideSpeed = 1;   //Higher == more speed
 
 const rows = Math.floor(screenHeight/hexHeight) + 1;
@@ -180,6 +180,7 @@ function stayLit() {
     fillHex(document.getElementById('1-0'));
 
     document.getElementById('0-13').style.opacity = 1;
+    document.getElementById('0-14').style.opacity = 1;
     document.getElementById('1-13').style.opacity = 1;
 
     document.getElementById('6-0').style.opacity = 1;
@@ -206,7 +207,14 @@ var glowTimeout = [];
 var hideTimeout = [];
 var timeoutValue = 0;
 
+function randomValue(min, max) 
+{
+    var r = Math.floor(Math.random() * (max - min)) + min;
+    return r;
+}
+
 function lightUp(){
+    
     for (let k = 0; k < rows * columns * 5 ; k++) {
         glowTimeout[k] =  setTimeout(() => {
             var r = Math.floor(Math.random() * rows);
@@ -227,7 +235,7 @@ function lightUp(){
                 hideLit();
             }, (k * showSpeed) / hideSpeed );
         }
-    }, 4000);
+    }, 2500);
     
 
     
@@ -306,12 +314,12 @@ function changeData() {
     }, 400);
     timeout2 = setTimeout(() => {
         updateValue();
-    }, 1000);
+    }, 600);
     timeout3 = setTimeout(() => {
         photo.style.opacity = 1;
         nameContainer.style.opacity = 1;
         dept.style.opacity = 1;
-    }, 1200);
+    }, 800);
 }
 function updateValue() {
 let d = data[currentData];
@@ -348,3 +356,4 @@ window.addEventListener('keydown', e => {
     }
 
 })
+
