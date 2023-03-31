@@ -255,13 +255,13 @@ let currentData = 0;
 
 data = [
     {
-        "name": "Adarsh Bharadwaj",
+        "name": "Adarsh Bhardwaj",
         "dept": "Department of Visual Media",
         "photo": "Assets/adarsh.png"
     },
     {
         "name": "Mayan Agrawal",
-        "dept": "Department of Registration and Correspondence",
+        "dept": "Department of Registrations and Correspondence",
         "photo": "Assets/mayan.png"
     },
     {
@@ -276,7 +276,7 @@ data = [
     },
     {
         "name": "Poorvansh Kavta",
-        "dept": "Department of Publicity and Patnerships",
+        "dept": "Department of Publicity and Partnerships",
         "photo": "Assets/poorvansh.png"
     },
     {
@@ -285,8 +285,8 @@ data = [
         "photo": "Assets/nishit.png"
     },
     {
-        "name": "Ishpreet Singh Sodhi",
-        "dept": "Guest Lectures and Paper Presentation",
+        "name": "Ishpreet Singh Sood",
+        "dept": "Guest Lectures and Paper Presentations",
         "photo": "Assets/ishpreet.png"
     },
     {
